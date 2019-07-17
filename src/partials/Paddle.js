@@ -9,23 +9,23 @@ export default class Paddle {
         this.y = y
         this.speed = 10
         this.score = 0
+        // let that = this
 
-        document.addEventListener('keydown', function(event){
-            console.log(event.key)
+        document.addEventListener('keydown', event => { 
             switch(event.key) {
                 case up:
-                        this.y = this.y - this.speed
+                        this.y = Math.max(0, this.y - this.speed)
                 break
                 case down:
-                        this.y = this.y + this.speed
-                break;
+                        this.y = Math.min(this.boardHeight - this.height, this.y + this.speed)
+                break
                 
             }
         })
     }
     render(svg){
         let rect = document.createElementNS(SVG_NS, 'rect')
-        rect.setAttributeNS(null,'fill', "white") 
+        rect.setAttributeNS(null,'fill', 'white') 
         rect.setAttributeNS(null, 'height', this.height)
         rect.setAttributeNS(null, 'width', this.width)
         rect.setAttributeNS(null, 'x', this.x)

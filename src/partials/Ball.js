@@ -24,11 +24,26 @@ export default class Ball {
         // console.log(this.vy)
         // console.log(this.vx)
     }
+    wallCollision(){
+        const hitTop = this.y - this.radius <= 0
+        const hitBottom = this.y - this.radius >= this.boardHeight
+
+        const hitRight = this.x + this.boardWidth <= this.boardWidth
+        const hitLeft = this.x - this.boardWidth >= 0
+
+        if(hitTop || hitBottom){
+            this.vy = -this.vy
+        }
+        if(hitLeft || hitRight){
+            this.vx = - this.vx
+        }
+
+    }
 
     render(svg){
         this.x += this.vx
         this.y += this.vy
-
+        this.wallCollision()
         // console.log(this.y)
         // console.log(this.x)
 

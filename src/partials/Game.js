@@ -2,6 +2,7 @@ import {SVG_NS, KEYS} from '../settings'
 import Board from './Board'
 import Paddle from './Paddle'
 import Ball from './Ball'
+import Score from './Score'
 export default class Game {
   constructor(element, width, height) {
     this.element = element
@@ -45,6 +46,10 @@ export default class Game {
     // Other code goes here...
     this.gameElement = document.getElementById(this.element)
 
+    // display score
+    this.score1 = new Score(this.width / 2 - 50, 30, 30)
+    this.score2 = new Score(this.width / 2 + 25, 30, 30)
+
     //event listner to pause the game
     document.addEventListener('keydown', event=> {
       switch(event.key) {
@@ -78,7 +83,10 @@ export default class Game {
     this.board.render(svg)
     this.player1.render(svg)
     this.player2.render(svg)
-    this.ball.render(svg)
+    this.ball.render(svg, this.player1, this.player2)
+    this.score1.render(svg, this.player1.score)
+    this.score2.render(svg, this.player2.score)
+    //  console.log(this.score)
     
   }
 }

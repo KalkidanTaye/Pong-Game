@@ -9,7 +9,7 @@ export default class Ball {
         this.boardHeight = boardHeight
         this.direction = 1
         this.ping1 = new Audio(pingSound1)
-        this.ping2 = new Audio(pingSound2)
+        this.ping2 = new Audio(pingSound1)
         this.reset()
     }
 
@@ -24,8 +24,7 @@ export default class Ball {
         }
         
         this.vx = this.direction * (6- Math.abs(this.vy))
-        // console.log(this.vy)
-        // console.log(this.vx)
+        
     }
     paddleCollision(player1, player2){
         if(this.vx > 0)
@@ -39,6 +38,7 @@ export default class Ball {
             ) {
                 this.vx = -this.vx
                 this.ping1.play()
+                this.ping1.muted = 0
             }
         } else {
             let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height)
@@ -48,9 +48,10 @@ export default class Ball {
                  && (this.x - this.radius >= leftX)
                  && (this.y >= topY && this.y <= bottomY)
               ) {
-                //  your code here for ball movement
+                // Ball movement
                 this.vx = -this.vx
                 this.ping2.play()
+                this.ping2.muted = 0
             }
         }
     } 

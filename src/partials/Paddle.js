@@ -30,6 +30,17 @@ export default class Paddle {
         let bottomY = y + height
         return [leftX, rightX, topY, bottomY]
     }
+    changePaddle(score1, score2){
+           
+        if((score1 - score2) === 5){
+            player1.height+=5
+            this.reset()
+          }
+          else if (score2 - score1 === 5) {
+            player1.height+=5
+            this.reset()
+        }
+    }
 
     render(svg){
         let rect = document.createElementNS(SVG_NS, 'rect')

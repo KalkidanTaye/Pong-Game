@@ -18,7 +18,7 @@ export default class Game {
     this.boardGap = 10
     
     this.board = new Board(this.width, this.height)
-    this.ball = new Ball(8, this.width, this.height)
+    this.ball = new Ball(8, this.width, this.height, 'Red')
     this.ball2 = new Ball(12, this.width, this.height, 'Red')
   
     //Player 1 Paddle
@@ -42,7 +42,6 @@ export default class Game {
       KEYS.down
       )
 
-
     this.paddle = new Paddle(this.width, this.height)
     // Other code goes here...
     this.gameElement = document.getElementById(this.element)
@@ -50,6 +49,19 @@ export default class Game {
     // display score
     this.score1 = new Score(this.width / 2 - 50, 30, 30)
     this.score2 = new Score(this.width / 2 + 25, 30, 30)
+    
+    //evet Listener to fire balls
+    document.addEventListener('keydown', event=> {
+      switch(event.key) {
+        case KEYS.f:
+        console.log(this) 
+        this.ball.reset() 
+        this.ball2.reset() 
+  
+        
+      }
+          
+    })
 
     //event listner to pause the game
     document.addEventListener('keydown', event=> {
@@ -88,7 +100,7 @@ export default class Game {
     this.ball2.render(svg, this.player1, this.player2)
     this.score1.render(svg, this.player1.score)
     this.score2.render(svg, this.player2.score)
-    //  console.log(this.score)
+    
     
   }
 }

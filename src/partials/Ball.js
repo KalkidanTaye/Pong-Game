@@ -38,7 +38,7 @@ export default class Ball {
             ) {
                 this.vx = -this.vx
                 this.ping1.play()
-                this.ping1.muted = 0
+               
             }
         } else {
             let paddle = player1.coordinates(player1.x, player1.y, player1.width, player1.height)
@@ -51,7 +51,7 @@ export default class Ball {
                 // Ball movement
                 this.vx = -this.vx
                 this.ping2.play()
-                this.ping2.muted = 0
+                // this.ping2.muted = 0
             }
         }
     } 
@@ -71,12 +71,37 @@ export default class Ball {
         }
 
     }
+    
     goal(player){
         player.score++
         this.reset()
-        console.log(player.score)
-
+        
+        }
+    
+    winner(player1, player2) {
+        if(player1.score > 30){
+                alert("winner");
+                this.reset()
+                player1.score = 0 
+                player2.score = 0 
+            }    
     }
+
+    changePaddle(player1, player2){
+    // console.log(player1.height)
+      if((player2.score - player1.score > 5) && (player2.height <= 64)) {
+          player2.height+=8
+          //change the color of the paddle when it changes height
+          console.log(player2.height)
+          
+        }
+        else if((player1.score - player2.score > 5) && (player1.height <= 64)){
+                player1.height+=8
+                console.log(player1.height)
+            
+          }
+       
+  }
 
     render(svg, player1, player2){
 
@@ -103,6 +128,8 @@ export default class Ball {
             this.goal(player2)
             this.direction = -1
         }
+        this.winner(player1, player2)
+        this.changePaddle(player1, player2)
     }
 
 }
